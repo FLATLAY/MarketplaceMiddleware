@@ -202,5 +202,5 @@ const styles = StyleSheet.create({
     color: 'rgba(74,144,226,1)',
     fontSize: 18,
     paddingLeft: 5,
-  },
+  }
 });

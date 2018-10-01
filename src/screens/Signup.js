@@ -142,6 +142,7 @@ export default class Signup extends Component {
             style={styles.rectangle2Copy1}
             keyboardType="email-address"
             returnKeyType="next"
+            underlineColorAndroid="transparent"
             onSubmitEditing={() => {
               this.emailFocus.current.focus();
             }}
@@ -154,6 +155,7 @@ export default class Signup extends Component {
             ref={this.emailFocus}
             style={styles.rectangle2Copy21}
             returnKeyType="next"
+            underlineColorAndroid="transparent"
             onSubmitEditing={() => {
               this.passwordFocus.current.focus();
             }}
@@ -167,6 +169,7 @@ export default class Signup extends Component {
             ref={this.passwordFocus}
             style={styles.rectangle2Copy3}
             secureTextEntry
+            underlineColorAndroid="transparent"
             returnKeyType="done"
             textContentType="password"
             placeholder="Password"
@@ -230,15 +233,6 @@ const styles = StyleSheet.create({
     top: '21.74%',
     left: '9.62%',
   },
-  shape: {
-    position: 'absolute',
-    height: '100.00%',
-    width: '100.00%',
-    top: '0.00%',
-    left: '0.00%',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
   google: {
     position: 'absolute',
     top: '78.71%',
@@ -250,42 +244,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '25.78%',
     left: '10.23%',
-  },
-  shape1: {
-    position: 'absolute',
-    height: '46.30%',
-    width: '21.43%',
-    top: '27.78%',
-    left: '0.00%',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
-  shape2: {
-    position: 'absolute',
-    height: '48.15%',
-    width: '50.00%',
-    top: '40.74%',
-    left: '50.00%',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
-  shape3: {
-    position: 'absolute',
-    height: '38.89%',
-    width: '76.19%',
-    top: '61.11%',
-    left: '4.76%',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
-  shape4: {
-    position: 'absolute',
-    height: '40.74%',
-    width: '76.19%',
-    top: '0.00%',
-    left: '4.76%',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
   },
   rectangle2Copy: {
     position: 'absolute',

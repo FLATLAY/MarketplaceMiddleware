@@ -1,4 +1,3 @@
-import React from 'react';
 import { Dimensions } from 'react-native';
 import Login from './src/screens/Login';
 import {
@@ -15,6 +14,8 @@ import Calender from './src/screens/Calender';
 import ConnectSocial from './src/screens/ConnectSocial';
 import Messages from './src/screens/Messages';
 import AccountDetails from './src/screens/AccountDetails';
+import NewCampaigns from './src/screens/NewCampaigns';
+import CalenderPop from './src/components/CalenderPop';
 
 const AuthStackNavigator = createStackNavigator(
   {
@@ -37,6 +38,8 @@ const HomeDrawerNavigator = createDrawerNavigator(
     accountDetails: AccountDetails,
   },
   {
+    mode: 'card',
+    initialRouteName: 'overview',
     drawerWidth: Dimensions.get('window').width - 100,
     contentComponent: Sidebar,
     contentOptions: {
@@ -57,7 +60,23 @@ const HomeDrawerNavigator = createDrawerNavigator(
   }
 );
 
+const OtherScreens = createStackNavigator(
+  {
+    newCampaigns: NewCampaigns,
+    calender: CalenderPop,
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    cardStyle: {
+      backgroundColor: 'transparent',
+      opacity: 1,
+    },
+  }
+);
+
 export default createSwitchNavigator({
   Auth: AuthStackNavigator,
   Home: HomeDrawerNavigator,
+  otherScreens: OtherScreens,
 });
