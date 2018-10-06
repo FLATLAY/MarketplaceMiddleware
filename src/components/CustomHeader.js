@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Image,
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import { Image, View, Text, Dimensions, TouchableOpacity } from 'react-native';
 
 class CustomHeader extends Component {
   render() {
@@ -40,7 +33,9 @@ class CustomHeader extends Component {
             paddingRight: 90,
           }}
         >
-          <Text style={{ fontSize: 18, color: '#9B9B9B' }}>
+          <Text
+            style={{ fontSize: 18, color: '#9B9B9B', fontFamily: 'mont-m' }}
+          >
             {this.props.headerTitle}
           </Text>
         </View>

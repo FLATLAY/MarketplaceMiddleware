@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import Login from './src/screens/Login';
 import {
@@ -5,6 +6,8 @@ import {
   createDrawerNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
+import { Font } from 'expo';
+
 import Signup from './src/screens/Signup';
 import Overview from './src/screens/Overview';
 import LiveCampaigns from './src/screens/LiveCampaigns';
@@ -16,6 +19,7 @@ import Messages from './src/screens/Messages';
 import AccountDetails from './src/screens/AccountDetails';
 import NewCampaigns from './src/screens/NewCampaigns';
 import CalenderPop from './src/components/CalenderPop';
+import LoadingScreen from './src/screens/LoadingScreen';
 
 const AuthStackNavigator = createStackNavigator(
   {
@@ -31,7 +35,7 @@ const HomeDrawerNavigator = createDrawerNavigator(
   {
     overview: Overview,
     liveCampaigns: LiveCampaigns,
-    analysis: Analysis,
+    Performance: Analysis,
     calender: Calender,
     connectSocial: ConnectSocial,
     messages: Messages,
@@ -75,8 +79,27 @@ const OtherScreens = createStackNavigator(
   }
 );
 
-export default createSwitchNavigator({
+const CustomStack = createSwitchNavigator({
+  LoadingScreen: LoadingScreen,
   Auth: AuthStackNavigator,
   Home: HomeDrawerNavigator,
   otherScreens: OtherScreens,
 });
+
+class App extends Component {
+  componentDidMount() {
+    Font.loadAsync({
+      'mont-r': require('./assets/fonts/Montserrat-Regular.ttf'),
+      'mont-l': require('./assets/fonts/Montserrat-Light.ttf'),
+      'mont-m': require('./assets/fonts/Montserrat-Medium.ttf'),
+      'mont-b': require('./assets/fonts/Montserrat-Bold.ttf'),
+      'mont-sb': require('./assets/fonts/Montserrat-SemiBold.ttf'),
+      'mont-t': require('./assets/fonts/Montserrat-Thin.ttf'),
+    });
+  }
+  render() {
+    return <CustomStack />;
+  }
+}
+
+export default App;

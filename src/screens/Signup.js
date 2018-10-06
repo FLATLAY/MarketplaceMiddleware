@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  AsyncStorage,
 } from 'react-native';
 import axios from 'axios';
 import { Constants } from 'expo';
@@ -60,6 +61,10 @@ export default class Signup extends Component {
             cancelable: false,
           });
         } else if (data.result === 'success') {
+          await AsyncStorage.multiSet([
+            ['email', `${this.state.email}`],
+            ['password', `${this.state.password}`],
+          ]);
           this.props.navigation.navigate('Home');
         }
 
@@ -102,22 +107,26 @@ export default class Signup extends Component {
             <Spinner
               visible={this.state.visible}
               textContent={'Loading...'}
-              textStyle={{ color: '#fff' }}
+              textStyle={{ color: '#fff', fontFamily: 'mont-m' }}
             />
           </View>
         ) : null}
         <View style={styles.rect4}>
-          <Text style={styles.text}>Have an account already?</Text>
+          <Text style={[styles.text, { fontFamily: 'mont-m' }]}>
+            Have an account already?
+          </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('LogIn')}
             activeOpacity={0.4}
           >
-            <Text style={styles.text2}>Log in</Text>
+            <Text style={[styles.text2, { fontFamily: 'mont-m' }]}>Log in</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.facebook} activeOpacity={0.6}>
           <View style={styles.rectangle2Copy2} />
-          <Text style={styles.signUpWithFaceboo}>Sign up with Facebook</Text>
+          <Text style={[styles.signUpWithFaceboo, { fontFamily: 'mont-m' }]}>
+            Sign up with Facebook
+          </Text>
           <View style={styles.facebook1}>
             <Image
               style={{ height: 25, width: 25 }}
@@ -133,13 +142,15 @@ export default class Signup extends Component {
             />
           </View>
           <View style={styles.rectangle2Copy} />
-          <Text style={styles.signUpWithGoogle}>Sign up with Google</Text>
+          <Text style={[styles.signUpWithGoogle, { fontFamily: 'mont-m' }]}>
+            Sign up with Google
+          </Text>
           <View style={styles.rectangle3} />
         </TouchableOpacity>
 
         <View style={styles.form}>
           <TextInput
-            style={styles.rectangle2Copy1}
+            style={[styles.rectangle2Copy1, { fontFamily: 'mont-m' }]}
             keyboardType="email-address"
             returnKeyType="next"
             underlineColorAndroid="transparent"
@@ -153,7 +164,7 @@ export default class Signup extends Component {
           />
           <TextInput
             ref={this.emailFocus}
-            style={styles.rectangle2Copy21}
+            style={[styles.rectangle2Copy21, { fontFamily: 'mont-m' }]}
             returnKeyType="next"
             underlineColorAndroid="transparent"
             onSubmitEditing={() => {
@@ -167,7 +178,7 @@ export default class Signup extends Component {
           />
           <TextInput
             ref={this.passwordFocus}
-            style={styles.rectangle2Copy3}
+            style={[styles.rectangle2Copy3, { fontFamily: 'mont-m' }]}
             secureTextEntry
             underlineColorAndroid="transparent"
             returnKeyType="done"
@@ -181,10 +192,14 @@ export default class Signup extends Component {
             style={styles.rectangle2}
             activeOpacity={0.6}
           >
-            <Text style={styles.register}>Register</Text>
+            <Text style={[styles.register, { fontFamily: 'mont-m' }]}>
+              Register
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.register1}>REGISTER</Text>
+        <Text style={[styles.register1, { fontFamily: 'mont-m' }]}>
+          REGISTER
+        </Text>
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
       </View>
     );
@@ -294,7 +309,7 @@ const styles = StyleSheet.create({
     width: '99.68%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 21.5,
     shadowColor: 'rgba(0,0,0,0.1)',
     shadowRadius: 20,
     shadowOpacity: 1,
@@ -343,7 +358,6 @@ const styles = StyleSheet.create({
   },
   register: {
     height: 23,
-    width: '19.87%',
     backgroundColor: 'transparent',
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',
@@ -372,7 +386,7 @@ const styles = StyleSheet.create({
   rect4: {
     top: '71.81%',
     width: 284,
-    left: '15%',
+    left: '10%',
     height: '5%',
     position: 'absolute',
     flexDirection: 'row',

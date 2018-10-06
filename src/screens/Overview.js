@@ -94,7 +94,7 @@ class Overview extends Component {
   render() {
     return (
       <View style={styles.root}>
-        <CustomHeader {...this.props} headerTitle="newCampaigns" />
+        <CustomHeader {...this.props} headerTitle="Overview" />
 
         <ScrollView
           style={styles.scrollViewNavigationOverview}
@@ -108,7 +108,9 @@ class Overview extends Component {
             activeOpacity={0.5}
           >
             <View style={styles.rectangle12Copy7} />
-            <Text style={styles.createCampaigns}>Create Campaigns</Text>
+            <Text style={[styles.createCampaigns, { fontFamily: 'mont-m' }]}>
+              Create Campaigns
+            </Text>
           </TouchableOpacity>
           <View style={{ paddingTop: 30 }}>
             {defaultData.map(item => (
@@ -162,7 +164,6 @@ const styles = StyleSheet.create({
     top: 10,
     left: 78,
     height: 23,
-    width: 151,
     backgroundColor: 'transparent',
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',

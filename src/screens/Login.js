@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  AsyncStorage,
 } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios';
@@ -43,6 +44,10 @@ class Login extends Component {
           visible: false,
         });
         if (data.result === 'success') {
+          await AsyncStorage.multiSet([
+            ['email', `${this.state.email}`],
+            ['password', `${this.state.password}`],
+          ]);
           this.props.navigation.navigate('Home');
         } else {
           Alert.alert('Error Message', data.msg, [{ text: 'OK' }], {
@@ -149,6 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 14,
     borderRadius: 4,
+    fontFamily: 'mont-m',
     borderWidth: 1,
     borderColor: '#DADAED',
   },
@@ -157,10 +163,10 @@ const styles = StyleSheet.create({
     top: '27.89%',
     left: '37.07%',
     height: '5.70%',
-    width: '26.67%',
     backgroundColor: 'transparent',
     color: 'rgba(85,85,85,1)',
     fontSize: 30,
+    fontFamily: 'mont-sb',
   },
   form: {
     position: 'absolute',
@@ -173,6 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     letterSpacing: -0.3,
     color: '#fff',
+    fontFamily: 'mont-m',
   },
   rectangle2: {
     position: 'absolute',
@@ -184,12 +191,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#71E7CA',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 21.5,
   },
   signUp: {
     position: 'absolute',
     top: '92.95%',
-    left: '15.47%',
+    left: '10.47%',
     height: '5.00%',
     width: '100%',
     flexDirection: 'row',
@@ -197,10 +204,12 @@ const styles = StyleSheet.create({
   dontHaveAnAccoun: {
     color: 'rgba(155,155,155,1)',
     fontSize: 18,
+    fontFamily: 'mont-m',
   },
   signUp1: {
+    paddingLeft: 5,
     color: 'rgba(74,144,226,1)',
     fontSize: 18,
-    paddingLeft: 5,
-  }
+    fontFamily: 'mont-m',
+  },
 });
