@@ -74,7 +74,7 @@ class Emoji extends Component {
             style={{
               fontSize: 15,
               fontWeight: 'bold',
-              fontFamily: 'mont-m',
+              fontFamily: 'Montserrat-Medium',
               padding: 10,
               color: 'rgba(169,174,190,1)',
             }}
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(74,74,74,1)',
     fontSize: 25,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.89,
   },
   isSelected: {

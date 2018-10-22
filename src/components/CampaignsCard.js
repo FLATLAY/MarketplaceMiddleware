@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const CampaignsCard = props => (
   <View style={styles.card2}>
@@ -7,6 +7,29 @@ const CampaignsCard = props => (
     <View
       style={[styles.rectangleCopy61, { backgroundColor: 'rgba(0,0,0,0.5)' }]}
     />
+
+    <TouchableOpacity
+      style={{
+        height: 30,
+        width: 30,
+        position: 'absolute',
+        right: 10,
+        top: 19.59 - 2.5,
+        justifyContent: 'center',
+      }}
+    >
+      <Image
+        resizeMode="contain"
+        style={{
+          height: 30,
+          width: 30,
+          alignSelf: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        source={require('../../assets/upload.png')}
+      />
+    </TouchableOpacity>
 
     <Text style={styles.active}>{props.state}</Text>
     <View style={styles.meatball} />
@@ -55,7 +78,7 @@ const styles = StyleSheet.create({
   },
   active: {
     position: 'absolute',
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     top: 19.59,
     left: 41.56,
     height: 25,
@@ -110,7 +133,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     color: 'rgba(255,255,255,1)',
     fontSize: 24,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.7,
   },
   vandifair: {
@@ -122,7 +145,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     color: 'rgba(255,255,255,1)',
     fontSize: 15,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.44,
   },
   atVeroEosEtAccus: {
@@ -135,7 +158,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: 'rgba(255,255,255,1)',
     fontSize: 14,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.1,
   },
   oval: {

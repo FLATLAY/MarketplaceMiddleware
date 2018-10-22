@@ -7,6 +7,7 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import LiveCampaignsOptions from '../data/LiveCampaignsOptions';
@@ -26,6 +27,15 @@ const LiveCampaignsComponent = [
   <BroadcastTools />,
 ];
 
+const LiveCampaignsImages = [
+  require('../../assets/LiveCampaignsImages/cta.png'),
+  require('../../assets/LiveCampaignsImages/poll.png'),
+  require('../../assets/LiveCampaignsImages/chat.png'),
+  require('../../assets/LiveCampaignsImages/emojies.png'),
+  require('../../assets/LiveCampaignsImages/carousel.png'),
+  require('../../assets/LiveCampaignsImages/broadcast.png'),
+];
+
 let previousPressedComponent = LiveCampaignsComponent[0];
 
 class LiveCampaigns extends Component {
@@ -42,7 +52,9 @@ class LiveCampaigns extends Component {
   state = {
     campaignsOptions: LiveCampaignsOptions,
     campaignsComponent: previousPressedComponent,
+    campaignsImage: LiveCampaignsImages[0],
   };
+
   handleOptionsSelect = index => {
     const newData = LiveCampaignsOptions.map(item => {
       if (item.key === `${index + 1}`) {
@@ -58,6 +70,7 @@ class LiveCampaigns extends Component {
       this.setState({
         campaignsComponent: LiveCampaignsComponent[index],
         campaignsOptions: newData,
+        campaignsImage: LiveCampaignsImages[index],
       });
     } else {
       this.setState({
@@ -108,7 +121,7 @@ class LiveCampaigns extends Component {
               style={{
                 color: itemStyle.color,
                 fontSize: 14,
-                fontFamily: 'mont-m',
+                fontFamily: 'Montserrat-Medium',
               }}
             >
               {item.text}
@@ -123,31 +136,101 @@ class LiveCampaigns extends Component {
     return (
       <View style={styles.root}>
         <CustomHeader {...this.props} headerTitle="Live Campaigns" />
-
+        <TouchableOpacity
+          style={{
+            height: 35,
+            width: 35,
+            position: 'absolute',
+            right: 20,
+            backgroundColor: 'rgba(80,227,194,1)',
+            borderRadius: 17.5,
+            top: 25,
+            justifyContent: 'center',
+            alignContent: 'center',
+            alignSelf: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Image
+            resizeMode="contain"
+            style={{
+              height: 23,
+              width: 23,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            source={require('../../assets/upload.png')}
+          />
+        </TouchableOpacity>
         <View
           style={{
             position: 'absolute',
-            top: '13.19%',
-            width: Dimensions.get('window').width,
+            top: '10%',
+            zIndex: 5,
+            height: 270,
+            width: '100%',
+            paddingHorizontal: 10,
           }}
         >
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            data={this.state.campaignsOptions}
-            horizontal={true}
-            renderItem={this._renderItem}
+          <Image
+            resizeMode="contain"
+            style={{
+              height: 270,
+              width: '100%',
+              borderRadius: 10,
+            }}
+            source={this.state.campaignsImage}
           />
         </View>
-        <View
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
           style={{
-            position: 'relative',
-            top: 100,
-            height: '100%',
+            position: 'absolute',
+            top: '10%',
+            backgroundColor: 'rgba(0,0,0,0)',
             width: '100%',
+            height: 700,
+            zIndex: 10,
           }}
         >
-          {this.state.campaignsComponent}
-        </View>
+          <View
+            style={{
+              marginTop: 250,
+              backgroundColor: '#fff',
+              shadowColor: 'gray',
+              borderTopRightRadius: 14,
+              borderTopLeftRadius: 14,
+              shadowOffset: { width: 0, height: -2 },
+              shadowOpacity: 0.4,
+              shadowRadius: 14,
+              elevation: 1,
+            }}
+          >
+            <View
+              style={{
+                width: Dimensions.get('window').width,
+                marginTop: 40,
+              }}
+            >
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                data={this.state.campaignsOptions}
+                horizontal={true}
+                renderItem={this._renderItem}
+              />
+            </View>
+            <View
+              style={{
+                height: 600,
+                width: '100%',
+              }}
+            >
+              {this.state.campaignsComponent}
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }

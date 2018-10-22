@@ -39,7 +39,11 @@ class Sidebar extends Component {
               source={require('../../assets/profile.png')}
             />
             <Text
-              style={{ fontSize: 18, color: '#9B9B9B', fontFamily: 'mont-m' }}
+              style={{
+                fontSize: 18,
+                color: '#9B9B9B',
+                fontFamily: 'Montserrat-Medium',
+              }}
             >
               Shivam dev
             </Text>
@@ -50,8 +54,8 @@ class Sidebar extends Component {
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              marginHorizontal: 30,
-              marginVertical: 5,
+              marginHorizontal: 34,
+              marginTop: 8,
             }}
           >
             <Image
@@ -59,7 +63,11 @@ class Sidebar extends Component {
               source={require('../../assets/logout.png')}
             />
             <Text
-              style={{ fontSize: 16, color: '#9B9B9B', fontFamily: 'mont-m' }}
+              style={{
+                fontSize: 16,
+                color: '#9B9B9B',
+                fontFamily: 'Montserrat-Medium',
+              }}
             >
               Logout
             </Text>

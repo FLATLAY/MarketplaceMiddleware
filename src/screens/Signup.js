@@ -10,7 +10,6 @@ import {
   AsyncStorage,
 } from 'react-native';
 import axios from 'axios';
-import { Constants } from 'expo';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import ApiLinks from '../data/ApiLinks';
@@ -107,24 +106,31 @@ export default class Signup extends Component {
             <Spinner
               visible={this.state.visible}
               textContent={'Loading...'}
-              textStyle={{ color: '#fff', fontFamily: 'mont-m' }}
+              textStyle={{ color: '#fff', fontFamily: 'Montserrat-Medium' }}
             />
           </View>
         ) : null}
         <View style={styles.rect4}>
-          <Text style={[styles.text, { fontFamily: 'mont-m' }]}>
+          <Text style={[styles.text, { fontFamily: 'Montserrat-Medium' }]}>
             Have an account already?
           </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('LogIn')}
             activeOpacity={0.4}
           >
-            <Text style={[styles.text2, { fontFamily: 'mont-m' }]}>Log in</Text>
+            <Text style={[styles.text2, { fontFamily: 'Montserrat-Medium' }]}>
+              Log in
+            </Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.facebook} activeOpacity={0.6}>
           <View style={styles.rectangle2Copy2} />
-          <Text style={[styles.signUpWithFaceboo, { fontFamily: 'mont-m' }]}>
+          <Text
+            style={[
+              styles.signUpWithFaceboo,
+              { fontFamily: 'Montserrat-Medium' },
+            ]}
+          >
             Sign up with Facebook
           </Text>
           <View style={styles.facebook1}>
@@ -142,7 +148,12 @@ export default class Signup extends Component {
             />
           </View>
           <View style={styles.rectangle2Copy} />
-          <Text style={[styles.signUpWithGoogle, { fontFamily: 'mont-m' }]}>
+          <Text
+            style={[
+              styles.signUpWithGoogle,
+              { fontFamily: 'Montserrat-Medium' },
+            ]}
+          >
             Sign up with Google
           </Text>
           <View style={styles.rectangle3} />
@@ -150,7 +161,10 @@ export default class Signup extends Component {
 
         <View style={styles.form}>
           <TextInput
-            style={[styles.rectangle2Copy1, { fontFamily: 'mont-m' }]}
+            style={[
+              styles.rectangle2Copy1,
+              { fontFamily: 'Montserrat-Medium' },
+            ]}
             keyboardType="email-address"
             returnKeyType="next"
             underlineColorAndroid="transparent"
@@ -164,7 +178,10 @@ export default class Signup extends Component {
           />
           <TextInput
             ref={this.emailFocus}
-            style={[styles.rectangle2Copy21, { fontFamily: 'mont-m' }]}
+            style={[
+              styles.rectangle2Copy21,
+              { fontFamily: 'Montserrat-Medium' },
+            ]}
             returnKeyType="next"
             underlineColorAndroid="transparent"
             onSubmitEditing={() => {
@@ -178,7 +195,10 @@ export default class Signup extends Component {
           />
           <TextInput
             ref={this.passwordFocus}
-            style={[styles.rectangle2Copy3, { fontFamily: 'mont-m' }]}
+            style={[
+              styles.rectangle2Copy3,
+              { fontFamily: 'Montserrat-Medium' },
+            ]}
             secureTextEntry
             underlineColorAndroid="transparent"
             returnKeyType="done"
@@ -192,12 +212,14 @@ export default class Signup extends Component {
             style={styles.rectangle2}
             activeOpacity={0.6}
           >
-            <Text style={[styles.register, { fontFamily: 'mont-m' }]}>
+            <Text
+              style={[styles.register, { fontFamily: 'Montserrat-Medium' }]}
+            >
               Register
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={[styles.register1, { fontFamily: 'mont-m' }]}>
+        <Text style={[styles.register1, { fontFamily: 'Montserrat-Medium' }]}>
           REGISTER
         </Text>
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
@@ -209,7 +231,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: 'white',
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    marginTop: 20,
   },
   facebook: {
     position: 'absolute',

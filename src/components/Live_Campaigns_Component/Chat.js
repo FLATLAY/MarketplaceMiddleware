@@ -42,7 +42,7 @@ class Chat extends Component {
           <Text
             style={{
               fontSize: 15,
-              fontFamily: 'mont-m',
+              fontFamily: 'Montserrat-Medium',
               fontWeight: 'bold',
               padding: 10,
               color: 'rgba(169,174,190,1)',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(74,74,74,1)',
     fontSize: 25,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.89,
   },
   pollYourAudience: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: 'rgba(155,155,155,1)',
     fontSize: 15,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.54,
   },
   rectangle2Copy: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,1)',
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
     paddingLeft: 14,
   },
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     color: 'rgba(155,155,155,1)',
     fontSize: 15,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.54,
   },
   addOptions: {
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,1)',
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
     paddingLeft: 14,
   },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',
     fontSize: 17,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.17,
   },
   activeTab: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',
     fontSize: 14,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.27,
   },
   activeTabCopy: {
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',
     fontSize: 14,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.27,
   },
   calendarWithAClockTimeTools: {

@@ -108,7 +108,12 @@ class Overview extends Component {
             activeOpacity={0.5}
           >
             <View style={styles.rectangle12Copy7} />
-            <Text style={[styles.createCampaigns, { fontFamily: 'mont-m' }]}>
+            <Text
+              style={[
+                styles.createCampaigns,
+                { fontFamily: 'Montserrat-Medium' },
+              ]}
+            >
               Create Campaigns
             </Text>
           </TouchableOpacity>

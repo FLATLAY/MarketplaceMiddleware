@@ -9,7 +9,6 @@ import {
   Alert,
   AsyncStorage,
 } from 'react-native';
-import { Constants } from 'expo';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: 'white',
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    marginTop: 20,
   },
   logo: {
     position: 'absolute',
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 14,
     borderRadius: 4,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     borderWidth: 1,
     borderColor: '#DADAED',
   },
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(85,85,85,1)',
     fontSize: 30,
-    fontFamily: 'mont-sb',
+    fontFamily: 'Montserrat-SemiBold',
   },
   form: {
     position: 'absolute',
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     letterSpacing: -0.3,
     color: '#fff',
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
   },
   rectangle2: {
     position: 'absolute',
@@ -204,12 +203,12 @@ const styles = StyleSheet.create({
   dontHaveAnAccoun: {
     color: 'rgba(155,155,155,1)',
     fontSize: 18,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
   },
   signUp1: {
     paddingLeft: 5,
     color: 'rgba(74,144,226,1)',
     fontSize: 18,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
   },
 });

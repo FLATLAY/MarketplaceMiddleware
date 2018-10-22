@@ -6,7 +6,6 @@ import {
   createDrawerNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
-import { Font } from 'expo';
 
 import Signup from './src/screens/Signup';
 import Overview from './src/screens/Overview';
@@ -37,9 +36,9 @@ const HomeDrawerNavigator = createDrawerNavigator(
     liveCampaigns: LiveCampaigns,
     Performance: Analysis,
     calender: Calender,
-    connectSocial: ConnectSocial,
     messages: Messages,
     accountDetails: AccountDetails,
+    connectSocial: ConnectSocial,
   },
   {
     mode: 'card',
@@ -87,16 +86,6 @@ const CustomStack = createSwitchNavigator({
 });
 
 class App extends Component {
-  componentDidMount() {
-    Font.loadAsync({
-      'mont-r': require('./assets/fonts/Montserrat-Regular.ttf'),
-      'mont-l': require('./assets/fonts/Montserrat-Light.ttf'),
-      'mont-m': require('./assets/fonts/Montserrat-Medium.ttf'),
-      'mont-b': require('./assets/fonts/Montserrat-Bold.ttf'),
-      'mont-sb': require('./assets/fonts/Montserrat-SemiBold.ttf'),
-      'mont-t': require('./assets/fonts/Montserrat-Thin.ttf'),
-    });
-  }
   render() {
     return <CustomStack />;
   }

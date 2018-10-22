@@ -20,13 +20,13 @@ const LiveCampaignsOptions = [
     isActive: false,
     active: {
       image: require('../../assets/LiveCampaignsLogo/poll-active.png'),
-      color: '#50E3C2',
+      color: '#000',
       backgroundColor: '#fff',
     },
     inactive: {
       image: require('../../assets/LiveCampaignsLogo/poll.png'),
       color: '#fff',
-      backgroundColor: '#50E3C2',
+      backgroundColor: '#000',
     },
   },
   {

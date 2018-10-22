@@ -157,7 +157,7 @@ class NewCampaigns extends Component {
                 dropdownTextStyle={{
                   color: 'rgba(169,174,190,1)',
                   fontSize: 16,
-                  fontFamily: 'mont-m',
+                  fontFamily: 'Montserrat-Medium',
                   letterSpacing: -0.3,
                 }}
                 options={typeData}
@@ -177,7 +177,7 @@ class NewCampaigns extends Component {
                 dropdownTextStyle={{
                   color: 'rgba(169,174,190,1)',
                   fontSize: 16,
-                  fontFamily: 'mont-m',
+                  fontFamily: 'Montserrat-Medium',
                   letterSpacing: -0.3,
                 }}
                 options={linkType}
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   startDate: {
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   endDate: {
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   baseGhostCopy: {
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(169,174,190,1)',
     fontSize: 18,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.34,
   },
   baseGhostCopy2: {
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(169,174,190,1)',
     fontSize: 18,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.34,
   },
   header: {
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(155,155,155,1)',
     fontSize: 18,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
   },
   iconArrowLeft: {
     marginLeft: 20,
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   rectangle2Copy2: {
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
   },
   imgeUrl: {
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   rectangle2Copy21: {
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
   },
   status: {
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   dropdownIconsHover: {
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
   },
   save: {
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(255,255,255,1)',
     fontSize: 17,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
   },
   name1: {
@@ -479,7 +479,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(124,132,149,1)',
     fontSize: 19,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: 0.35,
   },
   dropdownIconsHover1: {
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(169,174,190,1)',
     fontSize: 16,
-    fontFamily: 'mont-m',
+    fontFamily: 'Montserrat-Medium',
     letterSpacing: -0.3,
   },
 });

@@ -34,7 +34,11 @@ class CustomHeader extends Component {
           }}
         >
           <Text
-            style={{ fontSize: 18, color: '#9B9B9B', fontFamily: 'mont-m' }}
+            style={{
+              fontSize: 18,
+              color: '#9B9B9B',
+              fontFamily: 'Montserrat-Medium',
+            }}
           >
             {this.props.headerTitle}
           </Text>
