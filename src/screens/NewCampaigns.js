@@ -9,20 +9,78 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
+import uuid from 'react-native-uuid';
+import ImagePicker from 'react-native-image-picker';
+import { NavigationActions } from 'react-navigation';
+
+import { Consumer } from '../data/CampaignsData';
 
 const typeData = ['Active', 'Inactive', 'Completed'];
-const linkType = ['Image', 'Videos'];
-let todayDateStart = 'YYYY-DD-MM';
-let todayDateEnd = 'YYYY-DD-MM';
+const typeDataImage = {
+  Active: require('../../assets/green.png'),
+  Inactive: require('../../assets/red.png'),
+  Completed: require('../../assets/gray.png'),
+};
+const linkTypeData = ['Image', 'Videos'];
+
+let todayDateStart;
+let todayDateEnd;
+let nameValue;
+let imageValue;
+let linkTypeValue;
+let typeStateValue;
+let campignsType;
+let keyValue;
+let navigateTo = '';
+
+const options = {
+  title: 'Select Image',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
+
 class NewCampaigns extends Component {
   static navigationOptions = ({ navigation }) => {
-    console.log(navigation);
+    console.log('navigation', navigation);
+    if (navigation.state.params.campaignsType === 'UPDATE_CAMPAIGNS') {
+      const {
+        details,
+        endDate,
+        image,
+        startDate,
+        state,
+        key,
+        linkType,
+      } = navigation.state.params.data;
+      campignsType = 'UPDATE_CAMPAIGNS';
+      nameValue = details;
+      todayDateEnd = endDate;
+      imageValue = image;
+      todayDateStart = startDate;
+      keyValue = key;
+      navigateTo = navigation.state.params.navigateToValue;
+      typeStateValue = state;
+      linkTypeValue = linkType;
+    } else if (navigation.state.params.campaignsType === 'NEW_CAMPAIGNS') {
+      campignsType = 'NEW_CAMPAIGNS';
+      nameValue = '';
+      todayDateEnd = 'YYYY-MM-DD';
+      imageValue = 'DEFAULT';
+      navigateTo = navigation.state.params.navigateToValue;
+      todayDateStart = 'YYYY-MM-DD';
+      keyValue = uuid.v4();
+      typeStateValue = '';
+      linkTypeValue = linkTypeData[0];
+    }
   };
+
   state = {
-    name: '',
-    image: '',
-    linkType: linkType[0],
-    typeState: '',
+    name: nameValue,
+    image: imageValue,
+    linkType: linkTypeValue,
+    typeState: typeStateValue,
     currentDateEnd: todayDateEnd,
     currentDateStart: todayDateStart,
   };
@@ -32,160 +90,287 @@ class NewCampaigns extends Component {
       todayDateStart = data.date;
     } else if (data.type === 'END') {
       todayDateEnd = data.date;
+      if (new Date() <= new Date(todayDateStart)) {
+        typeStateValue = typeData[1];
+      } else if (
+        new Date() >= new Date(todayDateStart) &&
+        new Date() <= new Date(todayDateEnd)
+      ) {
+        typeStateValue = typeData[0];
+      } else if (
+        new Date() > new Date(todayDateEnd) &&
+        new Date() > new Date(todayDateStart)
+      ) {
+        typeStateValue = typeData[2];
+      }
     }
+    console.log('typeStateValue', typeStateValue);
+
     this.setState({
       currentDateEnd: todayDateEnd,
       currentDateStart: todayDateStart,
+      typeState: todayDateEnd === 'YYYY-MM-DD' ? '' : typeStateValue,
+    });
+  };
+
+  selectImage = () => {
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        // You can also display the image using data:
+        const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          image: source.uri,
+        });
+      }
     });
   };
 
   render() {
+    const {
+      name,
+      image,
+      typeState,
+      currentDateEnd,
+      currentDateStart,
+      linkType,
+    } = this.state;
     return (
-      <View style={styles.root}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              todayDateStart = 'YYYY-DD-MM';
-              todayDateEnd = 'YYYY-DD-MM';
-              this.setState(
-                {
-                  name: '',
-                  image: '',
-                  linkType: linkType[0],
-                  typeState: '',
-                  currentDateEnd: todayDateEnd,
-                  currentDateStart: todayDateStart,
-                },
-                () => this.props.navigation.navigate('Home')
-              );
-            }}
-          >
-            <Image
-              style={styles.iconArrowLeft}
-              source={require('../../assets/left.png')}
-            />
-          </TouchableOpacity>
-          <Text style={styles.createCampaigns}>Create Campaigns</Text>
-        </View>
+      <Consumer>
+        {stateValue => {
+          const { dispatch } = stateValue;
+          return (
+            <View style={styles.root}>
+              <View style={styles.header}>
+                <TouchableOpacity
+                  onPress={() => {
+                    todayDateStart = 'YYYY-DD-MM';
+                    todayDateEnd = 'YYYY-DD-MM';
+                    this.setState(
+                      {
+                        name: '',
+                        image: '',
+                        linkType: linkType[0],
+                        typeState: '',
+                        currentDateEnd: todayDateEnd,
+                        currentDateStart: todayDateStart,
+                      },
+                      () => {
+                        this.props.navigation.navigate(navigateTo);
+                      }
+                    );
+                  }}
+                >
+                  <Image
+                    style={styles.iconArrowLeft}
+                    source={require('../../assets/left.png')}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.createCampaigns}>Create Campaigns</Text>
+              </View>
 
-        <ScrollView
-          style={styles.scrollViewCampaignsSettings}
-          contentContainerStyle={{
-            height: 750,
-            width: 375,
-          }}
-        >
-          <View style={{ marginTop: -80 }}>
-            <View style={styles.datePicker}>
-              <Text style={styles.dateRange}>Date Range</Text>
-              <Text style={styles.startDate}>Start Date</Text>
-              <Text style={styles.endDate}>End Date</Text>
-              <View style={styles.baseGhostCopy} />
-              <TouchableOpacity
-                style={{
-                  position: 'absolute',
-                  top: 76,
-                  left: 273,
+              <ScrollView
+                style={styles.scrollViewCampaignsSettings}
+                contentContainerStyle={{
+                  height: 750,
+                  width: 375,
                 }}
-                onPress={() =>
-                  this.props.navigation.navigate('calender', {
-                    dateType: 'START',
-                    handleDate: this.handleChangeDate,
-                  })
-                }
               >
-                <Image
-                  source={require('../../assets/calender.png')}
-                  style={styles.group6Copy}
-                />
-              </TouchableOpacity>
-              <Text style={styles.style}>{this.state.currentDateStart}</Text>
-              <View style={styles.baseGhostCopy2} />
-              <TouchableOpacity
-                style={{
-                  position: 'absolute',
-                  top: 162,
-                  left: 273,
-                }}
-                onPress={() =>
-                  this.props.navigation.navigate('calender', {
-                    dateType: 'END',
-                    handleDate: this.handleChangeDate,
-                  })
-                }
-              >
-                <Image
-                  source={require('../../assets/calender.png')}
-                  style={styles.group6Copy2}
-                />
-              </TouchableOpacity>
-              <Text style={styles.style1}>{this.state.currentDateEnd}</Text>
-            </View>
+                <View style={{ marginTop: -80 }}>
+                  <View style={styles.datePicker}>
+                    <Text style={styles.dateRange}>Date Range</Text>
+                    <Text style={styles.startDate}>Start Date</Text>
+                    <Text style={styles.endDate}>End Date</Text>
+                    <View style={styles.baseGhostCopy} />
+                    <TouchableOpacity
+                      style={{
+                        position: 'absolute',
+                        top: 76,
+                        left: 273,
+                      }}
+                      onPress={() => {
+                        todayDateEnd = 'YYYY-DD-MM';
+                        this.setState({
+                          currentDateEnd: 'YYYY-DD-MM',
+                        });
+                        this.props.navigation.navigate('calender', {
+                          dateType: 'START',
+                          handleDate: this.handleChangeDate,
+                        });
+                      }}
+                    >
+                      <Image
+                        source={require('../../assets/calender.png')}
+                        style={styles.group6Copy}
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.style}>{currentDateStart}</Text>
+                    <View style={styles.baseGhostCopy2} />
+                    <TouchableOpacity
+                      disabled={
+                        currentDateStart === 'YYYY-DD-MM' ? true : false
+                      }
+                      style={{
+                        position: 'absolute',
+                        top: 162,
+                        left: 273,
+                      }}
+                      onPress={() =>
+                        this.props.navigation.navigate('calender', {
+                          dateType: 'END',
+                          handleDate: this.handleChangeDate,
+                          startDate: currentDateStart,
+                        })
+                      }
+                    >
+                      <Image
+                        source={require('../../assets/calender.png')}
+                        style={styles.group6Copy2}
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.style1}>{currentDateEnd}</Text>
+                  </View>
 
-            <View style={styles.iconArrowLeft} />
-            <View style={styles.name}>
-              <Text style={styles.title}>Title</Text>
-              <TextInput
-                style={[styles.rectangle2Copy2, styles.nylon]}
-                placeholder="Name"
-                underlineColorAndroid="transparent"
-                onChangeText={text => this.setState({ name: text })}
-                value={this.state.name}
-              />
+                  <View style={styles.iconArrowLeft} />
+                  <View style={styles.name}>
+                    <Text style={styles.title}>Title</Text>
+                    <TextInput
+                      style={[styles.rectangle2Copy2, styles.nylon]}
+                      placeholder="Enter title..."
+                      underlineColorAndroid="transparent"
+                      onChangeText={text => this.setState({ name: text })}
+                      value={name}
+                    />
+                  </View>
+                  <View style={styles.imgeUrl}>
+                    <Text style={styles.imageLinks}>{`${
+                      this.state.linkType
+                    }`}</Text>
+                    <TouchableOpacity
+                      onPress={this.selectImage}
+                      style={[styles.rectangle2Copy21]}
+                    >
+                      <Text
+                        style={styles.imageLinks2}
+                      >{`Select ${linkType}`}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.status}>
+                    <Text style={styles.status1}>Status</Text>
+                    <View style={styles.dropdownIconsHover}>
+                      <Text style={styles.active}>
+                        {typeState === '' ? 'Please select date' : typeState}
+                      </Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch({
+                        type: campignsType,
+                        data: {
+                          key: keyValue,
+                          name: 'Nylon',
+                          handle: '@vandifair',
+                          details: name,
+                          state: typeState,
+                          stateImage: typeDataImage[typeState],
+                          image: image,
+                          startDate: currentDateStart,
+                          endDate: currentDateEnd,
+                          linkType: linkTypeValue,
+                        },
+                      });
+                      if (
+                        navigateTo === 'liveCampaigns' &&
+                        typeState === 'Active'
+                      ) {
+                        dispatch({
+                          type: 'SELECTED_CAMPAIGNS',
+                          data: {
+                            key: keyValue,
+                            name: 'Nylon',
+                            handle: '@vandifair',
+                            details: name,
+                            state: typeState,
+                            stateImage: typeDataImage[typeState],
+                            image: image,
+                            startDate: currentDateStart,
+                            endDate: currentDateEnd,
+                            linkType: linkTypeValue,
+                          },
+                        });
+                      } else if (
+                        navigateTo === 'liveCampaigns' &&
+                        typeState === 'Inactive'
+                      ) {
+                        dispatch({
+                          type: 'SELECTED_CAMPAIGNS',
+                          data: '',
+                        });
+                      } else if (
+                        navigateTo === 'Home' &&
+                        campignsType === 'UPDATE_CAMPAIGNS' &&
+                        stateValue.selectedCampaigns.key === keyValue &&
+                        typeState === 'Inactive'
+                      ) {
+                        dispatch({
+                          type: 'SELECTED_CAMPAIGNS',
+                          data: '',
+                        });
+                      }
+
+                      this.props.navigation.navigate(navigateTo);
+                    }}
+                    disabled={
+                      name !== '' &&
+                      typeState !== '' &&
+                      currentDateEnd !== 'YYYY-DD-MM' &&
+                      currentDateStart !== 'YYYY-DD-MM'
+                        ? false
+                        : true
+                    }
+                    style={styles.save}
+                  >
+                    <View style={styles.rectangle2} />
+                    <Text style={styles.save1}>SAVE</Text>
+                  </TouchableOpacity>
+                  <View style={styles.name1}>
+                    <Text style={styles.linksType}>Links type</Text>
+                    <ModalDropdown
+                      style={styles.dropdownIconsHover1}
+                      dropdownStyle={styles.baseGhost1}
+                      textStyle={styles.image}
+                      defaultValue={
+                        linkTypeValue !== ''
+                          ? linkTypeValue
+                          : 'Please select...'
+                      }
+                      onSelect={value =>
+                        this.setState({ linkType: linkTypeData[value] })
+                      }
+                      dropdownTextStyle={{
+                        color: 'rgba(169,174,190,1)',
+                        fontSize: 16,
+                        fontFamily: 'Montserrat-Medium',
+                        letterSpacing: -0.3,
+                      }}
+                      options={linkTypeData}
+                    />
+                  </View>
+                </View>
+              </ScrollView>
             </View>
-            <View style={styles.imgeUrl}>
-              <Text style={styles.imageLinks}>{`${
-                this.state.linkType
-              } Links`}</Text>
-              <TextInput
-                style={[styles.rectangle2Copy21, styles.links]}
-                placeholder={`${this.state.linkType} links`}
-                underlineColorAndroid="transparent"
-                onChangeText={text => this.setState({ image: text })}
-                value={this.state.image}
-              />
-            </View>
-            <View style={styles.status}>
-              <Text style={styles.status1}>Status</Text>
-              <ModalDropdown
-                style={styles.dropdownIconsHover}
-                dropdownStyle={styles.baseGhost}
-                textStyle={styles.active}
-                onSelect={value =>
-                  this.setState({ typeState: typeData[value] })
-                }
-                dropdownTextStyle={{
-                  color: 'rgba(169,174,190,1)',
-                  fontSize: 16,
-                  fontFamily: 'Montserrat-Medium',
-                  letterSpacing: -0.3,
-                }}
-                options={typeData}
-              />
-            </View>
-            <View style={styles.save}>
-              <View style={styles.rectangle2} />
-              <Text style={styles.save1}>SAVE</Text>
-            </View>
-            <View style={styles.name1}>
-              <Text style={styles.linksType}>Links type</Text>
-              <ModalDropdown
-                style={styles.dropdownIconsHover1}
-                dropdownStyle={styles.baseGhost1}
-                textStyle={styles.image}
-                onSelect={value => this.setState({ linkType: linkType[value] })}
-                dropdownTextStyle={{
-                  color: 'rgba(169,174,190,1)',
-                  fontSize: 16,
-                  fontFamily: 'Montserrat-Medium',
-                  letterSpacing: -0.3,
-                }}
-                options={linkType}
-              />
-            </View>
-          </View>
-        </ScrollView>
-      </View>
+          );
+        }}
+      </Consumer>
     );
   }
 }
@@ -365,6 +550,15 @@ const styles = StyleSheet.create({
     height: 78,
     width: 319,
   },
+  imageLinks2: {
+    backgroundColor: 'transparent',
+    color: 'rgba(124,132,149,0.7)',
+    fontSize: 16.5,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    fontFamily: 'Montserrat-Medium',
+    letterSpacing: 0.35,
+  },
   imageLinks: {
     position: 'absolute',
     height: 26,
@@ -384,14 +578,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(218,218,237,1)',
     borderRadius: 4,
     backgroundColor: 'rgba(255,255,255,1)',
-  },
-  links: {
-    paddingLeft: 20,
-    backgroundColor: 'transparent',
-    color: 'rgba(169,174,190,1)',
-    fontSize: 16,
-    fontFamily: 'Montserrat-Medium',
-    letterSpacing: -0.3,
   },
   status: {
     position: 'absolute',
@@ -442,9 +628,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 42,
     width: 311,
-    borderRadius: 4,
     shadowColor: 'rgba(0,0,0,0.1)',
     shadowRadius: 20,
+    borderRadius: 21.5,
     shadowOpacity: 1,
     backgroundColor: '#71E7CA',
     shadowOffset: {

@@ -19,6 +19,7 @@ import AccountDetails from './src/screens/AccountDetails';
 import NewCampaigns from './src/screens/NewCampaigns';
 import CalenderPop from './src/components/CalenderPop';
 import LoadingScreen from './src/screens/LoadingScreen';
+import { Provider } from './src/data/CampaignsData';
 
 const AuthStackNavigator = createStackNavigator(
   {
@@ -87,7 +88,11 @@ const CustomStack = createSwitchNavigator({
 
 class App extends Component {
   render() {
-    return <CustomStack />;
+    return (
+      <Provider>
+        <CustomStack />
+      </Provider>
+    );
   }
 }
 

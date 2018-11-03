@@ -3,6 +3,8 @@ package com.marketplacemiddleware;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.horcrux.svg.SvgPackage;
 import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new ImagePickerPackage(),
             new SvgPackage(),
             new MPAndroidChartPackage()
       );

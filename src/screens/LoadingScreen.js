@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, AsyncStorage } from 'react-native';
+import { View, StyleSheet, AsyncStorage, YellowBox } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class LoadingScreen extends Component {
@@ -31,6 +31,8 @@ class LoadingScreen extends Component {
     }, 500);
   }
   render() {
+    YellowBox.ignoreWarnings(['Module RNFetchBlob']);
+
     return (
       <View style={styles.container}>
         <Spinner

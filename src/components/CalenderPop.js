@@ -7,9 +7,16 @@ import { CalendarList } from 'react-native-calendars';
 //   today.getMonth() + 1
 // )} `;
 
+let startDate = '';
+
 class CalenderPop extends Component {
   static navigationOptions = ({ navigation }) => {
     console.log(navigation);
+    if (navigation.state.params.dateType === 'END') {
+      startDate = navigation.state.params.startDate;
+    } else {
+      startDate = '';
+    }
   };
 
   state = {
@@ -28,21 +35,41 @@ class CalenderPop extends Component {
 
         <View
           style={{
-            height: '50%',
-            width: '100%',
-            backgroundColor: '#fff',
+            position: 'absolute',
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+          }}
+        />
+
+        <View
+          style={{
+            height: '70%',
+            // width: Dimensions.get('window').width - 20,
             justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
           }}
         >
           <CalendarList
             style={{
-              height: Dimensions.get('window').width,
-              width: Dimensions.get('window').width,
+              height: Dimensions.get('window').width + 50,
+              width: Dimensions.get('window').width - 20,
+              margin: 50,
+            }}
+            markedDates={{
+              startDate: {
+                selected: true,
+                marked: true,
+                selectedColor: 'blue',
+              },
             }}
             horizontal={true}
             pagingEnabled={true}
             scrollEnabled={true}
-            current={Date()}
+            calendarWidth={Dimensions.get('window').width - 20}
+            current={startDate === '' ? Date() : startDate}
+            minDate={startDate === '' ? Date() : startDate}
             onDayPress={day => {
               let sendData = {};
               if (this.props.navigation.state.params.dateType === 'START') {

@@ -2,45 +2,73 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const CampaignsCard = props => (
-  <View style={styles.card2}>
-    <Image source={props.image} style={styles.rectangleCopy61} />
-    <View
-      style={[styles.rectangleCopy61, { backgroundColor: 'rgba(0,0,0,0.5)' }]}
-    />
+  <View>
+    {props.empty ? (
+      <View style={styles.card2}>
+        <Image
+          source={require('../../assets/uploadimage.jpg')}
+          style={styles.rectangleCopy61}
+        />
+      </View>
+    ) : (
+      <View style={styles.card2}>
+        {props.image === 'DEFAULT' ? (
+          <Image
+            source={require('../../assets/imagenotavailable.png')}
+            style={styles.rectangleCopy61}
+          />
+        ) : (
+          <Image source={{ uri: props.image }} style={styles.rectangleCopy61} />
+        )}
+        <View
+          style={[
+            styles.rectangleCopy61,
+            { backgroundColor: 'rgba(0,0,0,0.5)' },
+          ]}
+        />
 
-    <TouchableOpacity
-      style={{
-        height: 30,
-        width: 30,
-        position: 'absolute',
-        right: 10,
-        top: 19.59 - 2.5,
-        justifyContent: 'center',
-      }}
-    >
-      <Image
-        resizeMode="contain"
-        style={{
-          height: 30,
-          width: 30,
-          alignSelf: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        source={require('../../assets/upload.png')}
-      />
-    </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigateSource.navigate('newCampaigns', {
+              campaignsType: 'UPDATE_CAMPAIGNS',
+              data: props.dataValue,
+              navigateToValue: 'Home',
+            })
+          }
+          style={{
+            height: 30,
+            width: 30,
+            position: 'absolute',
+            right: 10,
+            top: 19.59 - 2.5,
+            justifyContent: 'center',
+          }}
+        >
+          <Image
+            resizeMode="contain"
+            style={{
+              height: 30,
+              width: 30,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            source={require('../../assets/upload.png')}
+          />
+        </TouchableOpacity>
 
-    <Text style={styles.active}>{props.state}</Text>
-    <View style={styles.meatball} />
-    <Text style={styles.nylon}>{props.title}</Text>
-    <Text style={styles.vandifair}>{props.handle}</Text>
-    <Text style={styles.atVeroEosEtAccus}>
-      {props.details}
-      {'\n'}
-      {'\n'}
-    </Text>
-    <Image source={props.stateImage} style={styles.oval} />
+        <Text style={styles.active}>{props.state}</Text>
+        <View style={styles.meatball} />
+        <Text style={styles.nylon}>{props.title}</Text>
+        <Text style={styles.vandifair}>{props.handle}</Text>
+        <Text style={styles.atVeroEosEtAccus}>
+          {props.details}
+          {'\n'}
+          {'\n'}
+        </Text>
+        <Image source={props.stateImage} style={styles.oval} />
+      </View>
+    )}
   </View>
 );
 export default CampaignsCard;

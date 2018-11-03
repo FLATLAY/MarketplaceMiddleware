@@ -7,63 +7,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  YellowBox,
 } from 'react-native';
 
 import CustomHeader from '../components/CustomHeader';
 import CampaignsCard from '../components/CampaignsCard';
-
-const defaultData = [
-  {
-    key: '1',
-    name: 'Nylon',
-    handle: '@vandifair',
-    details: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-    `,
-    state: 'Active',
-    stateImage: require('../../assets/green.png'),
-    image: require('../../assets/hero.jpg'),
-  },
-  {
-    key: '2',
-    name: 'Nylon',
-    handle: '@vandifair',
-    details: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-    `,
-    state: 'Inactive',
-    stateImage: require('../../assets/red.png'),
-    image: require('../../assets/hero2.jpg'),
-  },
-  {
-    key: '3',
-    name: 'Nylon',
-    handle: '@vandifair',
-    details: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-    `,
-    state: 'Finished',
-    stateImage: require('../../assets/gray.png'),
-    image: require('../../assets/hero.jpg'),
-  },
-  {
-    key: '4',
-    name: 'Nylon',
-    handle: '@vandifair',
-    details: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-    `,
-    state: 'Inactive',
-    stateImage: require('../../assets/red.png'),
-    image: require('../../assets/hero2.jpg'),
-  },
-  {
-    key: '5',
-    name: 'Nylon',
-    handle: '@vandifair',
-    details: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-    `,
-    state: 'Finished',
-    stateImage: require('../../assets/gray.png'),
-    image: require('../../assets/hero.jpg'),
-  },
-];
+import { Consumer } from '../data/CampaignsData';
 
 class Overview extends Component {
   static navigationOptions = {
@@ -92,46 +41,66 @@ class Overview extends Component {
     ),
   };
   render() {
-    return (
-      <View style={styles.root}>
-        <CustomHeader {...this.props} headerTitle="Overview" />
+    YellowBox.ignoreWarnings(['Module RNFetchBlob']);
 
-        <ScrollView
-          style={styles.scrollViewNavigationOverview}
-          contentContainerStyle={{
-            width: 375,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('newCampaigns')}
-            style={styles.activeTab}
-            activeOpacity={0.5}
-          >
-            <View style={styles.rectangle12Copy7} />
-            <Text
-              style={[
-                styles.createCampaigns,
-                { fontFamily: 'Montserrat-Medium' },
-              ]}
-            >
-              Create Campaigns
-            </Text>
-          </TouchableOpacity>
-          <View style={{ paddingTop: 30 }}>
-            {defaultData.map(item => (
-              <CampaignsCard
-                key={item.key}
-                image={item.image}
-                title={item.name}
-                details={item.details}
-                handle={item.handle}
-                stateImage={item.stateImage}
-                state={item.state}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+    return (
+      <Consumer>
+        {value => {
+          console.log('campaigns', value);
+          return (
+            <View style={styles.root}>
+              <CustomHeader {...this.props} headerTitle="Overview" />
+              <ScrollView
+                style={styles.scrollViewNavigationOverview}
+                contentContainerStyle={{
+                  width: 375,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('newCampaigns', {
+                      campaignsType: 'NEW_CAMPAIGNS',
+                      navigateToValue: 'Home',
+                    })
+                  }
+                  style={styles.activeTab}
+                  activeOpacity={0.5}
+                >
+                  <View style={styles.rectangle12Copy7} />
+                  <Text
+                    style={[
+                      styles.createCampaigns,
+                      { fontFamily: 'Montserrat-Medium' },
+                    ]}
+                  >
+                    Create Campaigns
+                  </Text>
+                </TouchableOpacity>
+                <View style={{ paddingTop: 30 }}>
+                  {value.provideData.length === 0 ? (
+                    <CampaignsCard empty={true} />
+                  ) : (
+                    value.provideData.map(item => (
+                      <CampaignsCard
+                        navigateSource={this.props.navigation}
+                        dataValue={item}
+                        key={item.key}
+                        empty={false}
+                        image={item.image}
+                        title={item.name}
+                        details={item.details}
+                        handle={item.handle}
+                        stateImage={item.stateImage}
+                        state={item.state}
+                      />
+                    ))
+                  )}
+                </View>
+              </ScrollView>
+            </View>
+          );
+        }}
+      </Consumer>
     );
   }
 }
